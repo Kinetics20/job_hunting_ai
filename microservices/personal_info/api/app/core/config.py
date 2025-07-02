@@ -4,7 +4,7 @@ import os
 from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path=Path("../../envs/.env"))
+load_dotenv(dotenv_path=Path("../envs/.env.db_sql"))
 
 
 class Settings(BaseSettings):
@@ -13,7 +13,9 @@ class Settings(BaseSettings):
     POSTGRES_DB: str | None = os.getenv("POSTGRES_DB")
     POSTGRES_PORT: int = int(os.getenv("POSTGRES_PORT", "5442"))
     POSTGRES_HOST: str | None = os.getenv("POSTGRES_HOST")
+    POSTGRES_ASYNC_DRIVER: str = "postgresql+asyncpg://"
+    POSTGRES_SYNC_DRIVER: str = "postgresql+psycopg://"
 
-    DATABASE_URL: str = f'postgresql+async://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'
+    DATABASE_URL: str = f'{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'
 
 settings = Settings()
