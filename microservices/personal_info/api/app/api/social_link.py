@@ -54,11 +54,11 @@ async def get_social_link(
     if link is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Social Link Not Found")
 
-    return result.scalars().all()
+    return link
 
 
 @router.patch('/{id}/', response_model=SocialLinkOut)
-async def update_social_link(
+async def update_partially_social_link(
         id: int,
         update_data: SocialLinkUpdate,
         db: AsyncSession = Depends(get_db),
