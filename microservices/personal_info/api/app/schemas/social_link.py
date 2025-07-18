@@ -1,6 +1,6 @@
 from pydantic import BaseModel, HttpUrl, model_validator, field_serializer
 
-from api.app.models.social_link import SocialLink
+from app.models.social_link import SocialLink
 
 
 class SocialLinkCreate(BaseModel):

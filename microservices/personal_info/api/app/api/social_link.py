@@ -2,9 +2,9 @@ from sqlalchemy import select
 
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from api.app.core.database import get_db
-from api.app.models.social_link import SocialLink
-from api.app.schemas.social_link import SocialLinkOut, SocialLinkCreate, SocialLinkUpdatePartially, SocialLinkUpdate
+from app.core.database import get_db
+from app.models.social_link import SocialLink
+from app.schemas.social_link import SocialLinkOut, SocialLinkCreate, SocialLinkUpdatePartially, SocialLinkUpdate
 from sqlalchemy.ext.asyncio import AsyncSession
 
 

@@ -1,7 +1,7 @@
 from sqlalchemy import Integer, String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from api.app.core.database import Base
+from app.core.database import Base
 
 class SocialLink(Base):
     __tablename__ = "social_link"
