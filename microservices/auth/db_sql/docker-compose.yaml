@@ -1,0 +1,15 @@
+services:
+  auth_db:
+    image: postgres:17-alpine
+    env_file:
+      - ../.envs/.env
+    ports:
+      - "5436:5432"
+    volumes:
+      - auth_db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - backend_network
+
+volumes:
+  auth_db_data:

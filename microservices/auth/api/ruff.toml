@@ -1,0 +1,11 @@
+target-version = "py313"
+line-length = 120
+indent-width = 4
+
+[lint]
+select = ["E", "F", "B", "I", "UP", "N"]
+ignore = []
+
+[format]
+line-ending = "auto"
+quote-style = "double"

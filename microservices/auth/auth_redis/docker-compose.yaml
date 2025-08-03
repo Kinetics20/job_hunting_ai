@@ -1,0 +1,22 @@
+services:
+  auth_redis:
+    image: redis:8-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - redis_network
+    volumes:
+      - redis_data:/data
+    secrets:
+      - source: redis_password
+        target: redis_password
+#    command: [ "sh", "-c", "redis-server --requirepass \"$(cat /run/secrets/redis_password)\"" ]
+
+volumes:
+  redis_data:
+
+
+secrets:
+  redis_password:
+    file: ../.secrets/redis_password

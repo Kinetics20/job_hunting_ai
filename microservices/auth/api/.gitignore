@@ -1,0 +1,10 @@
+.idea
+.vscode
+
+.mypycache
+.pytest_cache
+.ruff_cache
+
+**/*.pyc
+
+.venv

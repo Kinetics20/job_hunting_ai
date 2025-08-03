@@ -1,0 +1,62 @@
+services:
+  auth_api:
+    build:
+      context: ../api
+      dockerfile: Dockerfile
+    env_file:
+      - ../.envs/.env
+    ports:
+      - "8086:80"
+    networks:
+      - backend_network
+      - redis_network
+      - proxy_network
+    secrets:
+      - source: redis_password
+        target: redis_password
+    develop:
+      watch:
+        - action: sync
+          path: ../api
+          target: /app
+          ignore:
+            - "*.pyc"
+            - "__pycache__/"
+            - ".venv/"
+  auth_jobs:
+    image: rabbitmq:4-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    env_file:
+      - ../.envs/.env
+    networks:
+      - backend_network
+
+  auth_mail_worker:
+    build:
+      context: ../api
+      dockerfile: Dockerfile.worker
+    command: ./.venv/bin/celery -A app.celery_worker worker --loglevel=info
+    env_file:
+      - ../.envs/.env
+    depends_on:
+      - auth_jobs
+    networks:
+      - backend_network
+
+#  flower:
+#    build:
+#      context: ../api
+#      dockerfile: Dockerfile.worker
+#    command: ./.venv/bin/flower --broker=amqp://guest:guest@rabbitmq:5672//
+#    ports:
+#      - "5555:5555"
+#    depends_on:
+#      - auth_jobs
+#    networks:
+#      - backend_network
+
+secrets:
+  redis_password:
+    file: ../.secrets/redis_password

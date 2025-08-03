@@ -1,0 +1,16 @@
+include:
+  - path:
+      - db_sql/docker-compose.yaml
+      - api/docker-compose.yaml
+      - auth_redis/docker-compose.yaml
+      - proxy/docker-compose.yaml
+
+networks:
+  backend_network:
+    driver: bridge
+
+  redis_network:
+    driver: bridge
+
+  proxy_network:
+    driver: bridge
