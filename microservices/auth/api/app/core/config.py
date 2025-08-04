@@ -30,10 +30,10 @@ class Settings(BaseSettings):
     REDIS_PORT: int = Field(6379, alias="REDIS_PORT")
     REDIS_DB: int = Field(0, alias="REDIS_DB")
 
-    REDIS_PASSWORD_FILE: str = "../.secrets/redis_password"
+    REDIS_PASSWORD_FILE: str = "/run/secrets/redis_password"
 
-    FRONTEND_URL: str = "http://localhost"
-    EMAIL_VERIFICATION_ENDPOINT: str = '/verify-email/'
+    FRONTEND_URL: str = Field(..., alias="FRONTEND_URL")
+    EMAIL_VERIFICATION_ENDPOINT: str = Field(..., alias="EMAIL_VERIFICATION_ENDPOINT")
 
     MAX_LOGIN_ATTEMPTS: int = 5
     BLOCK_TIME_SECONDS: int = 15 * 60

@@ -1,2 +1,4 @@
 .envs/*
 !.envs/*-default
+.secrets/*
+!.secrets/.gitkeep
