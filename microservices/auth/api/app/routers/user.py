@@ -1,7 +1,7 @@
 from typing import Annotated
 from redis.asyncio import Redis
 import datetime as dt
-from app.celery_worker import send_activation_email
+
 
 from fastapi import APIRouter, status, Depends, HTTPException, Body, Query, Response, Request, Cookie
 from itsdangerous import SignatureExpired, BadSignature
@@ -36,9 +36,7 @@ async def register_user(
     if existing:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
     user = await create_user(db, user_in)
-    token = generate_email_verification_token(user.email)
-    verify_url = f"{settings.FRONTEND_URL}{settings.EMAIL_VERIFICATION_ENDPOINT}?token={token}"
-    send_activation_email.delay(user.email, verify_url)
+
     return user
 
 
