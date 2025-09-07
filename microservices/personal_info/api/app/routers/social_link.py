@@ -28,10 +28,6 @@ async def add_social_links(
 ) -> list[SocialLinkOut]:
     created_links: list[SocialLink] = []
 
-    print("*" * 20)
-    print(user_id, type(user_id))
-    print("*" * 20)
-
     try:
         for link in links:
             item = SocialLink(user_id=user_id, **link.model_dump())
