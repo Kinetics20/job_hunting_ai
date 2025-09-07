@@ -1,2 +1,5 @@
 envs/*
 !envs/*-default
+/.envs/.env
+/.secrets/db_pass.secret
+/.secrets/redis_password
