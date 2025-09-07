@@ -1,13 +1,15 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 
-from .api import routers
+from .routers import routers
 
-
-app = FastAPI(title="Job Hunting AI", version="1.0.0")
-
+app = FastAPI(
+    title="Personal Info API",
+    version="1.0.1",
+)
 
 for router in routers:
     app.include_router(router)
+
 
 @app.get("/health")
 async def healthcheck() -> dict[str, str]:
