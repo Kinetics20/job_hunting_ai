@@ -23,27 +23,7 @@ services:
             - "*.pyc"
             - "__pycache__/"
             - ".venv/"
-  auth_jobs:
-    image: rabbitmq:4-management
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    env_file:
-      - ../.envs/.env
-    networks:
-      - backend_network
 
-  auth_mail_worker:
-    build:
-      context: ../api
-      dockerfile: Dockerfile.worker
-    command: ./.venv/bin/celery -A app.celery_worker worker --loglevel=info
-    env_file:
-      - ../.envs/.env
-    depends_on:
-      - auth_jobs
-    networks:
-      - backend_network
 
 #  flower:
 #    build:
