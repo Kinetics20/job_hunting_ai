@@ -11,7 +11,7 @@ services:
     secrets:
       - source: redis_password
         target: redis_password
-    command: [ "sh", "-c", "redis-server --requirepass \"$(cat /run/secrets/redis_password)\"" ]
+#    command: [ "sh", "-c", "redis-server --requirepass \"$(cat /run/secrets/redis_password)\"" ]
 
 volumes:
   redis_data:
