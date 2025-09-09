@@ -1,0 +1,14 @@
+.idea
+.vscode
+
+.mypycache
+.pytest_cache
+.ruff_cache
+
+**/*.pyc
+
+.venv
+/.envs/.env
+/.secrets/db_pass.secret
+/.secrets/redis_password
+**/__pycache__/
