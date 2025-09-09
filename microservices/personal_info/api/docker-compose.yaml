@@ -1,0 +1,32 @@
+services:
+  personal_info_api:
+    build:
+      context: ../api
+      dockerfile: Dockerfile
+    env_file:
+      - ../.envs/.env
+    ports:
+      - "8087:80"
+    networks:
+      - backend_network
+      - redis_network
+      - proxy_network
+    secrets:
+      - source: redis_password
+        target: redis_password
+    develop:
+      watch:
+        - action: sync
+          path: ../api
+          target: /app
+          ignore:
+            - "*.pyc"
+            - "__pycache__/"
+            - ".venv/"
+            - 'alembic'
+    volumes:
+      - ../api/alembic:/app/alembic
+      - ../api/alembic.ini:/app/alembic.ini
+secrets:
+  redis_password:
+    file: ../.secrets/redis_password
